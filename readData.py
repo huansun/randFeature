@@ -17,7 +17,6 @@ def mapHeader():
     for h in header:
         dicth[h] = m
         m = m + 1
-    #print dicth
     return dicth
 
 def readBrandIntoDict():
@@ -55,81 +54,20 @@ def readCSV(fName):
         #Sat Feb 09 21:29:29 +0800 2013
         try:
             time_notimezone = time[0:20] + time[26:]
-        #print time_notimezone
             dtime = datetime.strptime(time_notimezone, '%a %b %d %H:%M:%S %Y')
-            #if dtime.day < 10 and dtime.hour <16:
                 
         except ValueError:
             continue
-
         
-        #print dtime.day
         for b in brandsDict.keys():
             if b in text_decoded:
-                #print b
-                #print brandsDict[b]
-                #print brandsDict[b][dtime.day -1]
-                #print dtime.day-1
-                #print type(brandsDict[b])
                 brandsDict[b][dtime.day -1] = brandsDict[b][dtime.day -1]+1
-                #print brandsDict[b][dtime.day -1]
 
     return brandsDict
 
 
 def exportBrandsDict(fName):
     writer = csv.writer(open('BrandsMonthlyTrends.csv', 'wb'))
-    #header = ['time']
-    #for keyword in keywords:
-        #header.append(keyword)
-    
-    #writer.writerow(header)
     brandsDict = readCSV(fName)
     for key,value in brandsDict.items():
         key_encode = key.encode('utf-8')
-##        #value_encode = value.encode('utf-8')
-        row = [key_encode]
-        row.extend(value)        
-        writer.writerow(row)
-        #user_time = line[mapHeader()['user.created_at']]
-        
-        #Sat Feb 09 21:29:29 +0800 2013
-        #try:
-            #user_time_notimezone = user_time[0:20] + user_time[26:]
-        #print time_notimezone
-            #user_dtime = datetime.strptime(user_time_notimezone, '%a %b %d %H:%M:%S %Y')
-            #if dtime.day < 10 and dtime.hour <16:
-                
-        #except ValueError:
-            #continue
-        #num_bi_follower = int(line[mapHeader()['user.bi_followers_count']])
-        #num_status = int(line[mapHeader()['user.statuses_count']])
-        #city = line[mapHeader()['user.city']]
-        #province = line[mapHeader()['user.province']]
-        #num_follower = int(line[mapHeader()['user.followers_count']])
-        #num_friends = int(line[mapHeader()['user.friends_count']])
-        #source_raw = line[mapHeader()['source']]
-        #source = source_raw.decode('utf-8')
-        #online_status = int(line[mapHeader()['user.online_status']])
-        #try:
-            #num_comment = int(line[mapHeader()['comments_count']])
-        #except:
-            #continue
-        #num_reposts = int(line[mapHeader()['reposts_count']])
-        #verified_reason_raw = line[mapHeader()['user.verified_reason']]
-        #verified_reason = verified_reason_raw.decode('utf-8')
-        #verified = line[mapHeader()['user.verified']]
-
-        #tweets.append(Tweet(uid, text_decoded, loc_decoded, gender, dtime, num_bi_follower, num_status, city, province, num_follower, num_friends, source, num_comment, online_status, user_dtime, num_reposts,verified_reason, verified))
-        #timeList.append(dtime)
-        #timeList.append(time)
-    #print len(textList)
-    #print len(uidList), len(textList), len(locList), len(genderList), len(timeList)
-    #tweets = []
-    #for i in range(len(uidList)):
-        #tweets.append(Tweet(uidList[i], textList[i], locList[i], genderList[i], timeList[i]))
-    #print len(tweets)
-    #return tweets
-
-
-
